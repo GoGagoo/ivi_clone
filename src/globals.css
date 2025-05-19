@@ -1,0 +1,48 @@
+@import './styles/reset.css';
+@import './styles/vars.css';
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@font-face {
+	font-family: 'iviSansBase';
+	src: url('/shared/fonts/iviSansBase-Regular.woff2') format('woff2');
+	font-weight: 400;
+	font-display: swap;
+}
+
+@font-face {
+	font-family: 'iviSansBase';
+	src: url('/shared/fonts/iviSansBase-Medium.woff2') format('woff2');
+	font-weight: 500;
+	font-display: swap;
+}
+
+@font-face {
+	font-family: 'iviSansBase';
+	src: url('/shared/fonts/iviSansBase-Bold.woff2') format('woff2');
+	font-weight: 700;
+	font-display: swap;
+}
+
+body,
+p,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+	font-family: 'iviSansBase', sans-serif;
+	font-weight: 400;
+	background-color: var(--bg-color);
+	color: var(--primary-color);
+}
+
+button:focus,
+button:focus-visible {
+	outline: none !important;
+	box-shadow: none !important; /* если добавляется тень от ring */
+	-webkit-focus-ring-color: transparent !important; /* для Safari */
+}
