@@ -1,5 +1,5 @@
-@import './styles/reset.css';
-@import './styles/vars.css';
+@import '@app/styles/reset.css';
+@import '@app/styles/vars.css';
 
 @tailwind base;
 @tailwind components;
@@ -27,7 +27,6 @@
 }
 
 body,
-p,
 h1,
 h2,
 h3,
@@ -35,14 +34,34 @@ h4,
 h5,
 h6 {
 	font-family: 'iviSansBase', sans-serif;
-	font-weight: 400;
 	background-color: var(--bg-color);
 	color: var(--primary-color);
+	overflow-x: hidden;
 }
 
 button:focus,
 button:focus-visible {
 	outline: none !important;
-	box-shadow: none !important; /* если добавляется тень от ring */
-	-webkit-focus-ring-color: transparent !important; /* для Safari */
+	box-shadow: none !important;
+	-webkit-focus-ring-color: transparent !important;
+}
+
+.movie-description p {
+  margin-bottom: 1em;
+  line-height: 1.6;
+}
+
+.movie-description ul {
+  margin: 1em 0;
+  padding-left: 2em;
+}
+
+.movie-description li {
+  margin-bottom: 0.5em;
+}
+
+@layer base {
+	:root {
+		@apply transition-colors duration-200;
+	}
 }

@@ -1,0 +1,19 @@
+:root {
+  --subscribe-color: #f30745;
+  --subscribe-bg-from: #c447ff;
+  --subscribe-bg-to: #ea003d;
+
+  --primary-color: #393153;
+  --secondary-color: #ffffff;
+  --hover-primary-color: #fff;
+  --bg-color: rgb(179, 172, 226);
+  --primary-bg-color: #61558e;
+}
+
+.dark {
+  --primary-color: #fff;
+  --secondary-color: #ffffff7a;
+  --hover-primary-color: #393153;
+  --bg-color: #100e19;
+  --primary-bg-color: #1f1b2e;
+}

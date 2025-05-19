@@ -1,9 +1,23 @@
-import { CategoryPage } from './CategoryPage'
+import { CollectionPage } from './CollectionPage'
 import { Home } from './Home'
 import { Login } from './Login'
+import { MoviesPage } from './MoviesPage'
+import { NotFound } from './NotFound'
 import { ProfilePage } from './ProfilePage'
 import { Register } from './Register'
+import { SerialsPage } from './SerialsPage'
 import { SupportPage } from './SupportPage'
-import { NotFound } from './NotFound'
+import { WatchPage } from './WatchPage'
 
-export { CategoryPage, Home, Login, ProfilePage, Register, SupportPage, NotFound }
+export {
+	CollectionPage,
+	Home,
+	Login,
+	MoviesPage,
+	NotFound,
+	ProfilePage,
+	Register,
+	SerialsPage,
+	SupportPage,
+	WatchPage
+}

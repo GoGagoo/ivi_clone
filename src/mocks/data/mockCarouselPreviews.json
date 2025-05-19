@@ -1,0 +1,44 @@
+{
+	"carouselPreviews": [
+		{
+			"id": 1,
+			"title": "Спасатель",
+			"urlTitle": "spasitel",
+      "logo": "homeCarouselLogo1",
+			"description": "Капитан МЧС расследует трагическую аварию накануне свадьбы своей дочери. Детектив с Олегом Назаровым",
+			"posterKey": "homeCarouselPoster1"
+		},
+		{
+			"id": 2,
+			"title": "Харбин",
+			"urlTitle": "harbin",	
+			"logo": "homeCarouselLogo2",	
+			"description": "Корейские борцы с японской оккупацией готовят покушение на крупного коллаборациониста",
+			"posterKey": "homeCarouselPoster2"
+		},
+		{
+			"id": 3,
+			"title": "Царевна лягушка",
+			"urlTitle": "carevna-lyagushka",
+			"logo": "homeCarouselLogo3",
+			"description": "Заколдованная лягушка, живущая в современной Москве, становится Василисой Прекрасной и ищет любовь",
+			"posterKey": "homeCarouselPoster3"
+		},
+		{
+			"id": 4,
+			"title": "Малышка Джо",
+			"urlTitle": "malishka-dzho",
+			"logo": "homeCarouselLogo4",
+			"description": "Девушка-коллектор разыскивает украденные 10 миллионов долларов. Боевик с Харви Кейтелем",
+			"posterKey": "homeCarouselPoster4"
+		},
+		{
+			"id": 5,
+			"title": "Афера по-итальянски",
+			"urlTitle": "afera-po-italyanski",
+			"logo": "homeCarouselLogo5",
+			"description": "Двое авантюристов пытаются украсть картину у итальянских богачей со скрытыми мотивами",
+			"posterKey": "homeCarouselPoster5"
+		}
+	]
+}

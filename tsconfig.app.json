@@ -5,6 +5,7 @@
 		"useDefineForClassFields": true,
 		"lib": ["ES2020", "DOM", "DOM.Iterable"],
 		"module": "ESNext",
+		"esModuleInterop": true,
 		"skipLibCheck": true,
 
 		/* Bundler mode */
@@ -24,8 +25,18 @@
 		"noUncheckedSideEffectImports": true,
 		"baseUrl": "./",
 		"paths": {
-			"@/*": ["./src/*"]
-		}
+      "@/*": ["src/*"],
+      "@app/*": ["src/app/*"],
+      "@entities/*": ["src/entities/*"],
+      "@features/*": ["src/features/*"],
+      "@mocks/*": ["src/mocks/*"],
+      "@shared/*": ["src/shared/*"],
+      "@pages/*": ["src/pages/*"],
+      "@widgets/*": ["src/widgets/*"]
+    }
 	},
-	"include": ["src"]
+	"include": ["src"],
+	"ts-node": {
+		"esm": true
+	}
 }

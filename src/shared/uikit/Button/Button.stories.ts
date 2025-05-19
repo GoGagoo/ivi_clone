@@ -20,10 +20,10 @@ export const Primary: Story = {
 	},
 }
 
-export const Secondary: Story = {
+export const Subscription: Story = {
 	args: {
-		children: 'Secondary',
-		variant: 'secondary',
+		children: 'Subscription',
+		variant: 'subscription',
 		size: 'md',
 	},
 }
