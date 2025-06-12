@@ -1,7 +1,7 @@
 import { useGetSerialsPreviewsQuery } from '@/shared/api/rtkQuery'
 import { ContentFilter, ExpandableText } from '@/widgets'
 import transformToCategoryItems from '@entities/previews/model/types/categories'
-import serialsCategoryCovers from '@features/category-content/assets/serials-covers'
+import { serialsCategoryCovers } from '@shared/assets/images/category/serials-covers'
 import { CategoryList } from '@features/category-content/shared/ui/CategoryList'
 import { Divide } from '@shared/uikit'
 import { SerialsCategoryDescription } from '@widgets/CategoryPage/model/category-descriptions/SerialsCategoryDescription'

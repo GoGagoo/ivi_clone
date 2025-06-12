@@ -1,12 +1,12 @@
 import { useGetCarouselPreviewsQuery } from '@/shared/api/rtkQuery'
 import { useCarousel } from '@features/carousel-content/lib/hooks/useCarousel'
+import { homeCarouselLogos } from '@shared/assets/images/carousel/logos'
+import { homeCarouselPosters } from '@shared/assets/images/carousel/posters'
 import { SkeletonCarousel } from '@shared/ui/Skeleton/SkeletonCarousel'
 import { Button } from '@shared/uikit'
 import { useMemo } from 'react'
 import { FaChevronLeft, FaChevronRight } from 'react-icons/fa'
 import { Link } from 'react-router-dom'
-import { homeCarouselLogos } from '../../carousel-content/assets/posters/carousel/logos'
-import { homeCarouselPosters } from '../../carousel-content/assets/posters/carousel/posters'
 
 interface Props {
 	autoSlide?: boolean

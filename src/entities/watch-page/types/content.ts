@@ -1,5 +1,5 @@
-import type { homeCarouselLogoKey } from '@features/carousel-content/assets/posters/carousel/logos'
-import type { homeCarouselPosterKey } from '@features/carousel-content/assets/posters/carousel/posters'
+import type { homeCarouselLogoKey } from '@shared/types/carousel'
+import type { homeCarouselPosterKey } from '@shared/types/carousel'
 
 export interface ContentItem {
 	id: number
