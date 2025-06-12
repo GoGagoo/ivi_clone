@@ -1,5 +1,5 @@
 import type { moviesCategoryPosterKey } from '@features/category-content/assets/movies-covers'
-import type { serialsCategoryPosterKey } from '@features/category-content/assets/serials-covers'
+import type { serialsCategoryPosterKey } from '@shared/assets/images/category/serials-covers'
 import type { homeCollectionsPosterKey } from '@features/home-collections/assets/home-posters'
 
 export type AllPosterKeys = 

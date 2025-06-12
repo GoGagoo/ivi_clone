@@ -41,15 +41,15 @@ export const Login = () => {
 			await signIn(data.email, data.password)
 			navigate('/')
 		} catch (error: any) {
-			console.error('Registration error:', error.code, error.message)
+			console.error('Login error:', error.code, error.message)
 
 			if (error.code) {
 				switch (error.code) {
-					case 'auth/email-already-in-use':
 					case 'auth/invalid-email':
+						case 'auth/user-not-found':
 						setError('email', { type: 'manual', message: error.message })
 						break
-					case 'auth/weak-password':
+					case 'auth/wrong-password':
 						setError('password', { type: 'manual', message: error.message })
 						break
 					default:
@@ -97,12 +97,12 @@ export const Login = () => {
 											{errors.password.message}
 										</p>
 									)}
-									{firebaseError && (
-										<div className='grid mt-5 place-items-center text-sm  text-red-500'>
-											{firebaseError}
-										</div>
-									)}
 								</div>
+								{firebaseError && (
+									<div className='grid place-items-center text-sm text-red-500'>
+										{firebaseError}
+									</div>
+								)}
 							</fieldset>
 							<div className='place-items-center'>
 								<div className='mt-3'>

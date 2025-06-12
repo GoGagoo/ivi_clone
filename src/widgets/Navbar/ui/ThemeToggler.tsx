@@ -46,13 +46,7 @@ export const ThemeToggler = () => {
 			withSearch={false}
 		>
 			<Combobox.Button className='flex items-center gap-2 px-3 py-2 text-sm font-bold rounded-lg dark:bg-[var(--primary-bg-color)] text-white hover:bg-[var(--primary-color)] bg-[var(--primary-bg-color)] dark:hover:bg-[var(--hover-primary-color)] transition-colors cursor-pointer min-w-[40px] xl:min-w-[140px]'>
-				{selectedTheme.id === 'light' ? (
-					<AiOutlineSun className='w-4 h-4 max-w-14 md:max-w-none' />
-				) : selectedTheme.id === 'dark' ? (
-					<BsMoonStars className='w-4 h-4 max-w-14 md:max-w-none' />
-				) : (
-					<FiMonitor className='w-4 h-4 max-w-14 md:max-w-none' />
-				)}
+				{selectedTheme.icon}
 				<span className="hidden xl:inline">{selectedTheme.name}</span>
 			</Combobox.Button>
 		</Select>

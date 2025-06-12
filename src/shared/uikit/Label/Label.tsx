@@ -12,7 +12,6 @@ export const Label: FC<Props> = ({ children, htmlFor }) => {
 		<LabelComponent
 			htmlFor={htmlFor}
 			className={clsx(
-				'peer',
 				'absolute text-sm text-gray-500 duration-300 transform -translate-y-4 scale-75 top-3 z-10',
 				'origin-[0] font-bold start-2.5 cursor-pointer',
 				'peer-focus:text-gray-400 peer-placeholder-shown:scale-100',

@@ -19,7 +19,7 @@ export const MoviesPage = () => {
 						<span className='font-bold relative z-10 group-hover:text-white'>
 							Мой Иви
 						</span>
-						<span className='absolute left-0 bottom-0 w-full h-0.5 transition-all bg-[var(--primary-bg-color)] dark:bg-[var(--secondary-color)] z-0 group-hover:h-full'></span>
+						<span className='absolute left-0 bottom-0 w-full h-0.5 transition-all bg-[var(--primary-bg-color)] dark:bg-[var(--secondary-color)] z-0 group-hover:h-full group-focus:h-full'></span>
 					</Link>
 					<span className='mx-1 text-gray-400'>/</span>
 					<span className='text-gray-100 dark:text-[var(--secondary-color)]'>

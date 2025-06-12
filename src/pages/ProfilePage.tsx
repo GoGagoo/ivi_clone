@@ -1,6 +1,7 @@
+import { logOut } from '@shared/api/firebase/lib/hooks/useAuth'
 import { auth } from '@shared/api/firebase/auth'
 import { Button, Divide } from '@shared/uikit'
-import { onAuthStateChanged, signOut, type User } from 'firebase/auth'
+import { onAuthStateChanged, type User } from 'firebase/auth'
 import { useEffect, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 
@@ -20,12 +21,14 @@ export const ProfilePage = () => {
 
 	if (loading) return <div>Загрузка...</div>
 
-	const userSignOut = () => {
-		signOut(auth)
-			.then(() => console.log('success'))
-			.catch((e) => console.log(e))
-			navigate('/')
-	}
+	const userSignOut = async () => {
+    try {
+      await logOut() 
+      navigate('/')
+    } catch (e) {
+      console.error('Ошибка при выходе:', e)
+    }
+  }
 
 	const usernameFirstChar = authUser?.displayName?.charAt(0).toUpperCase()
 

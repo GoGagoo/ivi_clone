@@ -16,34 +16,24 @@ const signUp = async (email: string, password: string, displayName: string) => {
 			password
 		)
 
+		await updateProfile(userCredential.user, {
+			displayName,
+		})
+
 		const user = userCredential.user
 		const idToken = await user.getIdToken()
 
 		localStorage.setItem('firebaseUserToken', idToken)
-		localStorage.setItem(
-			'userData',
-			JSON.stringify({
-				uid: user.uid,
-				email: user.email,
-				displayName: user.displayName,
-				photoURL: user.photoURL,
-				username: user.displayName || 'user' + user.uid.slice(0, 4),
-			})
-		)
-
-		await updateProfile(userCredential.user, {
-			displayName: displayName,
-		})
 
 		return userCredential.user
 	} catch (err) {
-    if (err instanceof FirebaseError) {
-      const errorMessage = getAuthErrorMessage(err.code)
-      const error = new Error(errorMessage)
-      throw error
-    }
-    throw new Error('Произошла неизвестная ошибка при регистрации')
-  }
+		if (err instanceof FirebaseError) {
+			const errorMessage = getAuthErrorMessage(err.code)
+			const error = new Error(errorMessage)
+			throw error
+		}
+		throw new Error('Произошла неизвестная ошибка при регистрации')
+	}
 }
 
 const signIn = async (email: string, password: string) => {
@@ -61,18 +51,23 @@ const signIn = async (email: string, password: string) => {
 
 		return userCredential.user
 	} catch (err) {
-    if (err instanceof FirebaseError) {
-      throw new Error(getAuthErrorMessage(err.code))
-    }
-    throw new Error('Произошла неизвестная ошибка')
-  }
+		if (err instanceof FirebaseError) {
+			throw new Error(getAuthErrorMessage(err.code))
+		}
+		throw new Error('Произошла неизвестная ошибка')
+	}
 }
 
-const logOut = async () => {
+const logOut = async (): Promise<void> => {
 	try {
 		await signOut(auth)
+		localStorage.removeItem('firebaseUserToken')
 	} catch (error) {
-		console.error(error)
+		console.error('Полная ошибка при выходе:', error)
+		if (error instanceof Error)
+			throw new Error(`Не удалось выйти из системы: ${error.message}`)
+
+		throw new Error('Не удалось выйти из системы по неизвестной причине')
 	}
 }
 

@@ -1,6 +1,6 @@
 import { useGetContentOverviewQuery } from '@/shared/api/rtkQuery'
-import { homeCarouselLogos } from '@features/carousel-content/assets/posters/carousel/logos'
-import { homeCarouselPosters } from '@features/carousel-content/assets/posters/carousel/posters'
+import { homeCarouselLogos } from '@shared/assets/images/carousel/logos'
+import { homeCarouselPosters } from '@shared/assets/images/carousel/posters'
 import { SkeletonWatch } from '@shared/ui/Skeleton/SkeletonWatch'
 import { Badge, Button } from '@shared/uikit'
 import { Link, useParams } from 'react-router-dom'

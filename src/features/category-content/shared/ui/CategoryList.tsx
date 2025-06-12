@@ -21,7 +21,7 @@ export const CategoryList = ({
 		useHorizontalScroll()
 
 	useEffect(() => {
-		if (data) setTimeout(checkScroll, 0)
+		if (data) requestAnimationFrame(() => checkScroll())
 	}, [data, checkScroll])
 
 	return (
