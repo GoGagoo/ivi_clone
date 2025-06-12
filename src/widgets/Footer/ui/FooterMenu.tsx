@@ -1,20 +1,22 @@
+import { useCheckCertificateQuery } from '@/shared/api/rtkQuery'
 import { CertificationDialog } from '@/widgets'
-import { SubscriptionDialog } from '@widgets/Dialogs/SubscriptionDialog/ui/SubscriptionDialog'
-import { useCheckCertificateQuery } from '@entities/api/rtkQuery'
 import { Button } from '@shared/uikit'
+import { SubscriptionDialog } from '@widgets/Dialogs/SubscriptionDialog/ui/SubscriptionDialog'
 import { useState } from 'react'
 import { MdOutlineMail } from 'react-icons/md'
 import { Link } from 'react-router-dom'
 import shareIcon from '/assets/footer-share-icon.svg'
 
 export const FooterMenu = () => {
-	const [isCertificationDialogOpen, setIsCertificationDialogOpen] = useState(false)
-	const [isSubscriptionDialogOpen, setIsSubscriptionDialogOpen] = useState(false)
+	const [isCertificationDialogOpen, setIsCertificationDialogOpen] =
+		useState(false)
+	const [isSubscriptionDialogOpen, setIsSubscriptionDialogOpen] =
+		useState(false)
 
 	const { refetch: refetchCertificate } = useCheckCertificateQuery()
 
 	const setOpenCertificationDialog = () => setIsCertificationDialogOpen(true)
-	
+
 	return (
 		<div className='mt-10 mb-10 grid grid-cols-4 gap-5 font-bold'>
 			<div>

@@ -1,11 +1,11 @@
-import { useGetMoviesPreviewsQuery } from '@entities/api/rtkQuery'
+import { useGetMoviesPreviewsQuery } from '@/shared/api/rtkQuery'
 import { ContentFilter, ExpandableText } from '@/widgets'
+import transformToCategoryItems from '@entities/previews/model/types/categories'
 import moviesCategoryCovers from '@features/category-content/assets/movies-covers'
 import { CategoryList } from '@features/category-content/shared/ui/CategoryList'
 import { Divide } from '@shared/uikit'
 import { MoviesCategoryDescription } from '@widgets/CategoryPage/model/category-descriptions/MoviesCategoryDescription'
 import { Link } from 'react-router-dom'
-import transformToCategoryItems from '@entities/previews/types/categories'
 
 export const MoviesPage = () => {
 	const { data: moviesCollections } = useGetMoviesPreviewsQuery()
@@ -34,7 +34,7 @@ export const MoviesPage = () => {
 				>
 					<MoviesCategoryDescription preview={false} />
 				</ExpandableText>
-				
+
 				<ContentFilter />
 
 				<h1 className='pt-6 text-2xl md:text-3xl leading-[44px] font-bold'>

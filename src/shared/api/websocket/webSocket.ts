@@ -1,3 +1,4 @@
+import { WS_URL } from '@shared/api/firebase/auth/constants'
 import type { ChatMessage } from '@shared/ui/SupportChatMessage/types/chat-message'
 
 let socket: WebSocket | null = null
@@ -12,10 +13,11 @@ const startWebSocket = (chatId: string, userId: string): WebSocket => {
 
 	if (socket) return socket
 
-	socket = new WebSocket('ws://localhost:3000/ws')
+	const ws = new WebSocket(WS_URL)
+	socket = ws
 
 	socketReady = new Promise((resolve, reject) => {
-		socket!.addEventListener('open', () => {
+		ws.addEventListener('open', () => {
 			console.log('🟢 Подключение:', { chatId, userId })
 			socket?.send(JSON.stringify({ type: 'CONNECT', chatId, userId }))
 			resolve()
@@ -25,12 +27,12 @@ const startWebSocket = (chatId: string, userId: string): WebSocket => {
 			}, 10000)
 		})
 
-		socket!.addEventListener('error', (err) => {
+		ws.addEventListener('error', (err) => {
 			console.error('❌ WebSocket ошибка:', err)
 			reject(err)
 		})
 
-		socket!.addEventListener('close', () => {
+		ws.addEventListener('close', () => {
 			clearInterval(pingInterval)
 			socket = null
 			socketReady = null
@@ -38,10 +40,10 @@ const startWebSocket = (chatId: string, userId: string): WebSocket => {
 		})
 	})
 
-	return socket
+	return ws
 }
 
-export const sendMessage = async (message: ChatMessage ) => {
+export const sendMessage = async (message: ChatMessage) => {
 	await socketReady
 	if (socket?.readyState === WebSocket.OPEN) {
 		socket.send(JSON.stringify(message))
@@ -50,4 +52,4 @@ export const sendMessage = async (message: ChatMessage ) => {
 	}
 }
 
-export default startWebSocket 
+export default startWebSocket

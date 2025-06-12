@@ -1,9 +1,9 @@
-import { ChatPanel } from '@/widgets'
 import {
 	useConnectToChatQuery,
 	useGetMessagesQuery,
-} from '@entities/api/websocket/chatApi'
-import { sendMessage } from '@entities/api/websocket/webSocket'
+} from '@/shared/api/websocket/chatApi'
+import { sendMessage } from '@/shared/api/websocket/webSocket'
+import { ChatPanel } from '@/widgets'
 import { SupportChatMessage } from '@shared/ui/SupportChatMessage/SupportChatMessage.tsx'
 import type { ChatMessage } from '@shared/ui/SupportChatMessage/types/chat-message'
 import { useState } from 'react'
@@ -22,19 +22,19 @@ export const SupportPage: React.FC<Props> = ({ chatId, userId }) => {
 	useConnectToChatQuery({ chatId, userId })
 
 	const handleSendText = () => {
-	if (!text.trim()) return
-	const msg: ChatMessage  = {
-		id: crypto.randomUUID(),
-		type: 'TEXT',
-		chatId,
-		userId,
-		content: text,
-		createdAt: Date.now(),
+		if (!text.trim()) return
+		const msg: ChatMessage = {
+			id: crypto.randomUUID(),
+			type: 'TEXT',
+			chatId,
+			userId,
+			content: text,
+			createdAt: Date.now(),
+		}
+		console.log('Отправка сообщения:', msg)
+		sendMessage(msg)
+		setText('')
 	}
-	console.log('Отправка сообщения:', msg)
-	sendMessage(msg)
-	setText('')
-}
 
 	const handleFileChange = (file: File) => {
 		const reader = new FileReader()
@@ -81,20 +81,22 @@ export const SupportPage: React.FC<Props> = ({ chatId, userId }) => {
 		setTimeout(() => mediaRecorder.stop(), 3000)
 	}
 
-	const uniqueMessages = Array.from(new Map(messages.map((m) => [m.id, m])).values())
+	const uniqueMessages = Array.from(
+		new Map(messages.map((m) => [m.id, m])).values()
+	)
 
 	if (!chatId || !userId) return <div>Ошибка: не указан chatId или userId</div>
 
 	return (
 		<div className='mt-10 px-20 pt-10 pb-5 w-2/3 mx-auto border rounded-lg shadow-md space-y-4 flex flex-col justify-center items-center'>
 			{uniqueMessages.map((msg, index) => (
-			<SupportChatMessage
+				<SupportChatMessage
 					key={msg.id || `${msg.userId}-${msg.createdAt}-${index}`}
 					message={msg}
 					isOwn={msg.userId === userId}
 				/>
 			))}
-			<ChatPanel 
+			<ChatPanel
 				text={text}
 				onChangeText={setText}
 				onSendText={handleSendText}

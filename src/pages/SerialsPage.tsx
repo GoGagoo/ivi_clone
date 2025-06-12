@@ -1,6 +1,6 @@
-import transformToCategoryItems  from '@entities/previews/types/categories'
+import { useGetSerialsPreviewsQuery } from '@/shared/api/rtkQuery'
 import { ContentFilter, ExpandableText } from '@/widgets'
-import { useGetSerialsPreviewsQuery } from '@entities/api/rtkQuery'
+import transformToCategoryItems from '@entities/previews/model/types/categories'
 import serialsCategoryCovers from '@features/category-content/assets/serials-covers'
 import { CategoryList } from '@features/category-content/shared/ui/CategoryList'
 import { Divide } from '@shared/uikit'

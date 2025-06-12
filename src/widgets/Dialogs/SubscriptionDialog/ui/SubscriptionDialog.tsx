@@ -1,12 +1,12 @@
 import {
 	useActivateSubscriptionMutation,
 	useCheckSubscriptionQuery,
-} from '@entities/api/rtkQuery'
+} from '@/shared/api/rtkQuery'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { saveSubscriptionStatus } from '@shared/api/firebase/utils/statuses/saveSubscriptionStatus'
 import { useAuthListener } from '@shared/lib/hooks/useAuthListener'
 import { Button, Dialog, Input } from '@shared/uikit'
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import { useForm } from 'react-hook-form'
 import { z } from 'zod'
 
@@ -29,7 +29,8 @@ interface Props {
 }
 
 export const SubscriptionDialog: React.FC<Props> = ({ isOpen, onClose }) => {
-	const [isSuccess, setIsSuccess] = useState(false)
+	const [isPaymentFormOpen, setIsPaymentFormOpen] = useState(true)
+  const [isSubscriptionSuccessOpen, setIsSubscriptionSuccessOpen] = useState(false)
 
 	const { user } = useAuthListener()
 
@@ -38,6 +39,13 @@ export const SubscriptionDialog: React.FC<Props> = ({ isOpen, onClose }) => {
 		useCheckSubscriptionQuery(undefined, {
 			skip: !user?.uid,
 		})
+
+	useEffect(() => {
+    if (isOpen && subscriptionData?.hasSubscription) {
+      setIsPaymentFormOpen(false)
+      setIsSubscriptionSuccessOpen(true)
+    }
+  }, [isOpen, subscriptionData])
 
 	const {
 		register,
@@ -62,10 +70,12 @@ export const SubscriptionDialog: React.FC<Props> = ({ isOpen, onClose }) => {
 
 			await refetchSubscription()
 			await saveSubscriptionStatus(user.uid)
-			setIsSuccess(true)
+			
+			setIsPaymentFormOpen(false)
+      setIsSubscriptionSuccessOpen(true)
 
 			setTimeout(() => {
-				setIsSuccess(false)
+				setIsSubscriptionSuccessOpen(false)
 				reset()
 				onClose()
 			}, 4000)
@@ -74,78 +84,85 @@ export const SubscriptionDialog: React.FC<Props> = ({ isOpen, onClose }) => {
 		}
 	}
 
-	const isActivated = subscriptionData?.hasSubscription || false
-
-	if (isSuccess || isActivated) {
-		return (
+	return (
+		<>
 			<Dialog
 				variant='subscription'
-				isOpen={isOpen}
-				onClose={onClose}
+				isOpen={isOpen && isPaymentFormOpen && !subscriptionData?.hasSubscription}
+				onClose={() => {
+					setIsSubscriptionSuccessOpen(false)
+					onClose()
+				}}
+				title='Оформление подписки'
+			>
+				<form onSubmit={handleSubmit(onSubmit)} className='space-y-5'>
+					<p className='text-gray-600'>
+						Введите промокод для активации сертификата
+					</p>
+					<Input
+						placeholder='Номер карты'
+						variant='search'
+						type='text'
+						icon='cardNumber'
+						{...register('cardNumber')}
+						maxLength={16}
+						error={errors.cardNumber?.message}
+					/>
+					<div className='flex gap-4'>
+						<Input
+							placeholder='Срок действия (MM/YY)'
+							variant='search'
+							icon='expiry'
+							maxLength={5}
+							error={errors.expiry?.message}
+							{...register('expiry')}
+						/>
+						<Input
+							placeholder='CVV-код'
+							variant='search'
+							type='password'
+							icon='cvv'
+							maxLength={3}
+							error={errors.cvv?.message}
+							{...register('cvv')}
+						/>
+					</div>
+					<div className='flex gap-4'>
+						<Button onClick={onClose} className='flex-1 rounded-xl'>
+							Отмена
+						</Button>
+						<Button
+							type='submit'
+							variant='primary'
+							className='flex-1 rounded-xl'
+							disabled={isSubmitting}
+						>
+							{isSubmitting ? 'Обработка...' : 'Оплатить'}
+						</Button>
+					</div>
+				</form>
+			</Dialog>
+			<Dialog
+				variant='subscription'
+				isOpen={
+					isOpen && 
+					(isSubscriptionSuccessOpen || subscriptionData?.hasSubscription)
+				}
+				onClose={() => {
+					setIsSubscriptionSuccessOpen(false)
+					onClose()
+				}}
 				title='Оформление подписки'
 			>
 				<div className='text-center py-4'>
 					<p className='text-green-600 font-semibold'>
-						Подписка успешно оформлена! 🎉
+						{subscriptionData?.hasSubscription 
+							? "У вас уже есть активная подписка!" 
+							: "Подписка успешно оформлена! 🎉"
+						}
 					</p>
 				</div>
 			</Dialog>
-		)
-	}
-
-	return (
-		<Dialog
-			variant='subscription'
-			isOpen={isOpen}
-			onClose={onClose}
-			title='Оформление подписки'
-		>
-			<form onSubmit={handleSubmit(onSubmit)} className='space-y-5'>
-				<p className='text-gray-600'>
-					Введите промокод для активации сертификата
-				</p>
-				<Input
-					placeholder='Номер карты'
-					variant='search'
-					type='text'
-					icon='cardNumber'
-					{...register('cardNumber')}
-					maxLength={16}
-					error={errors.cardNumber?.message}
-				/>
-				<div className='flex gap-4'>
-					<Input
-						placeholder='Срок действия (MM/YY)'
-						variant='search'
-						icon='expiry'
-						maxLength={5}
-						error={errors.expiry?.message}
-						{...register('expiry')}
-					/>
-					<Input
-						placeholder='CVV-код'
-						variant='search'
-						type='password'
-						icon='cvv'
-						maxLength={3}
-						error={errors.cvv?.message}
-						{...register('cvv')}
-					/>
-				</div>
-				<div className='flex gap-4'>
-					<Button onClick={onClose} className='flex-1 rounded-xl'>
-						Отмена
-					</Button>
-					<Button
-						type='submit'
-						variant='primary'
-						className='flex-1 rounded-xl'
-						disabled={isSubmitting}
-					>
-						{isSubmitting ? 'Обработка...' : 'Оплатить'}
-					</Button>
-				</div>
-			</form>
-		</Dialog>
+		</>
 	)
 }

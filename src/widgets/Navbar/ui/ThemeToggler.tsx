@@ -13,13 +13,10 @@ const themes = [
 
 export const ThemeToggler = () => {
 	const [selectedTheme, setSelectedTheme] = useState(() => {
-		if (typeof window !== 'undefined') {
-      const savedTheme = localStorage.getItem('theme')
-      return savedTheme 
-        ? themes.find(t => t.id === savedTheme) || themes[1]
-        : themes[2]
-    }
-    return themes[2]
+    const savedTheme = localStorage.getItem('theme')
+    return savedTheme
+      ? themes.find(t => t.id === savedTheme) || themes[1]
+      : themes[2]
   })
 
 	useEffect(() => {

@@ -1,4 +1,4 @@
-import { useCheckSubscriptionQuery } from '@entities/api/rtkQuery'
+import { useCheckSubscriptionQuery } from '@/shared/api/rtkQuery'
 import { Button } from '@shared/uikit'
 import { SubscriptionDialog } from '@widgets/Dialogs/SubscriptionDialog/ui/SubscriptionDialog'
 import { useState } from 'react'

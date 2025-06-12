@@ -7,3 +7,4 @@ export const APP_ID = import.meta.env.VITE_APP_ID
 export const MEASUREMENT_ID = import.meta.env.VITE_MEASUREMENT_ID
 export const USE_REAL_API = import.meta.env.VITE_USE_REAL_API
 export const API_URL = import.meta.env.VITE_API_URL
+export const WS_URL = import.meta.env.VITE_WS_URL

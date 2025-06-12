@@ -1,4 +1,4 @@
-import { useCheckSubscriptionQuery } from '@entities/api/rtkQuery'
+import { useCheckSubscriptionQuery } from '@/shared/api/rtkQuery'
 import { useAuthListener } from '@shared/lib/hooks/useAuthListener'
 import { Button } from '@shared/uikit'
 import { SubscriptionDialog } from '@widgets/Dialogs/SubscriptionDialog/ui/SubscriptionDialog'
@@ -34,7 +34,7 @@ export const SubscribeBadge = () => {
 				size='sm'
 				variant='subscription'
 			>
-				{hasSubscription ? 'Подписка активирована✅' : 'Оплатить подписку'}
+				{hasSubscription ? 'Подписка активирована ✅' : 'Оплатить подписку'}
 			</Button>
 			<SubscriptionDialog
 				isOpen={isSubscriptionDialogOpen}

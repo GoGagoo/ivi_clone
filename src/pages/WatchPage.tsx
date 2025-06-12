@@ -1,10 +1,10 @@
-import { useGetContentOverviewQuery } from '@entities/api/rtkQuery'
+import { useGetContentOverviewQuery } from '@/shared/api/rtkQuery'
 import { homeCarouselLogos } from '@features/carousel-content/assets/posters/carousel/logos'
 import { homeCarouselPosters } from '@features/carousel-content/assets/posters/carousel/posters'
+import { SkeletonWatch } from '@shared/ui/Skeleton/SkeletonWatch'
 import { Badge, Button } from '@shared/uikit'
 import { Link, useParams } from 'react-router-dom'
 import { NotFound } from './NotFound'
-import { SkeletonWatch } from '@shared/ui/Skeleton/SkeletonWatch'
 
 export const WatchPage = () => {
 	const { slug } = useParams<{ slug: string }>()

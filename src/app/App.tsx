@@ -9,11 +9,16 @@ import {
 	SerialsPage,
 	WatchPage,
 } from '@/pages'
-import { Footer, Navbar } from '@/widgets'
-import { ProtectedRoute } from '@shared/utils/ProtectedRoute.tsx'
-import { SupportPageWrapper } from '@widgets/SupportPageWrapper/SupportPageWrapper.tsx'
+import { Footer, Navbar, SupportPageWrapper } from '@/widgets'
+import { useAuthListener } from '@shared/lib/hooks/useAuthListener'
 import { useEffect } from 'react'
-import { Route, BrowserRouter as Router, Routes } from 'react-router-dom'
+import {
+	Navigate,
+	Outlet,
+	Route,
+	BrowserRouter as Router,
+	Routes,
+} from 'react-router-dom'
 
 function App() {
 	useEffect(() => {
@@ -23,6 +28,15 @@ function App() {
 		}
 	}, [])
 
+	const ProtectedRoutesWrapper = () => {
+		const { user, loading } = useAuthListener()
+
+		if (loading) return null
+		if (!user) return <Navigate to='/login' replace />
+
+		return <Outlet />
+	}
+
 	return (
 		<div className='px-2 lg:px-10 xl:px-24'>
 			<Router>
@@ -31,20 +45,16 @@ function App() {
 					<Route path='/' element={<Home />} />
 					<Route path='/login' element={<Login />} />
 					<Route path='/register' element={<Register />} />
-					<Route
-						path='/support'
-						element={
-							<ProtectedRoute>
-								<SupportPageWrapper />
-							</ProtectedRoute>
-						}
-					/>
+					<Route path='/profile/:slug' element={<ProfilePage />} />
+					<Route path='/collections/' element={<CollectionPage />} />
 					<Route path='/movies' element={<MoviesPage />} />
 					<Route path='/serials' element={<SerialsPage />} />
 					<Route path='/watch/:slug' element={<WatchPage />} />
-					<Route path='/profile/:slug' element={<ProfilePage />} />
-					<Route path='/collections/' element={<CollectionPage />} />
 					<Route path='*' element={<NotFound />} />
+
+					<Route element={<ProtectedRoutesWrapper />}>
+						<Route path='/support' element={<SupportPageWrapper />} />
+					</Route>
 				</Routes>
 				<Footer />
 			</Router>

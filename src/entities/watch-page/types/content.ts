@@ -25,8 +25,8 @@ export interface FilterParams {
 }
 
 export interface CollectionsResponse {
-  [x: string]: any
   items: ContentItem[]
+  [key: string]: unknown
 }
 
 export interface SearchContentItem {

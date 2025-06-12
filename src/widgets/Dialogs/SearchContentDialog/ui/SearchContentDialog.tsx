@@ -1,4 +1,4 @@
-import { useGetSearchedContentQuery } from '@entities/api/rtkQuery.ts'
+import { useGetSearchedContentQuery } from '@/shared/api/rtkQuery'
 import { Dialog, Input } from '@shared/uikit'
 import { useEffect, useState } from 'react'
 import { Link } from 'react-router-dom'
@@ -18,15 +18,15 @@ export const SearchContentDialog: React.FC<Props> = ({ isOpen, onClose }) => {
 		skip: !debouncedSearchQuery.trim(),
 	})
 
-  useEffect(() => {
-    if (!isOpen) setSearchQuery('')
-  }, [isOpen])
+	useEffect(() => {
+		if (!isOpen) setSearchQuery('')
+	}, [isOpen])
 
-  const handleClickResult = () => {
-    setTimeout(() => {
-      onClose()
-    }, 0)
-  }
+	const handleClickResult = () => {
+		setTimeout(() => {
+			onClose()
+		}, 0)
+	}
 
 	return (
 		<Dialog
@@ -58,10 +58,10 @@ export const SearchContentDialog: React.FC<Props> = ({ isOpen, onClose }) => {
 								<li
 									key={`${item.id}-${index}`}
 									className='p-2 rounded hover:bg-gray-100 dark:hover:bg-[var(--subscribe-color)]'
-                  >
+								>
 									<Link
 										to={`/watch/${item.urlTitle}`}
-                    onClick={handleClickResult}
+										onClick={handleClickResult}
 										className='block w-full h-full'
 									>
 										{item.title}

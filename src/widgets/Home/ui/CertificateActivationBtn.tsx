@@ -1,4 +1,4 @@
-import { useCheckCertificateQuery } from '@entities/api/rtkQuery'
+import { useCheckCertificateQuery } from '@/shared/api/rtkQuery'
 import { Button } from '@shared/uikit'
 import { CertificationDialog } from '@widgets/Dialogs/CertificationDialog/ui/CertificationDialog'
 import { useState } from 'react'

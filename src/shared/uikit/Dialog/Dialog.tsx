@@ -12,7 +12,7 @@ const variantClasses = {
 }
 
 interface Props {
-	isOpen: boolean
+	isOpen: boolean | undefined
 	variant: 'search' | 'certification' | 'subscription'
 	onClose: () => void
 	title: string

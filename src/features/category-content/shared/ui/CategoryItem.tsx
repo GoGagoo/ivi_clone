@@ -1,35 +1,41 @@
-import type { HomeSliderPreview } from '@entities/previews/types/home-slider'
+import type { ICategoryItem } from '@entities/previews/model/types/categories'
+import clsx from 'clsx'
 import { Link } from 'react-router-dom'
 
 export type CardVariant = 'category' | 'home'
 
-interface Props<T extends HomeSliderPreview['items'][0]> {
-	item: T
-	variant?: 'category' | 'home'
-	covers: Record<string, string>
+interface Props<T extends ICategoryItem> {
+  item: T
+  variant?: CardVariant
+  covers: Record<string, string>
 }
 
-export const CategoryItem = <T extends HomeSliderPreview['items'][0]>({
-	item,
-	variant = 'category',
-	covers,
+export const CategoryItem = <T extends ICategoryItem>({
+  item,
+  variant = 'category',
+  covers,
 }: Props<T>) => {
 	return (
 		<Link
 			to={`/watch/${item.urlTitle}`}
-			className={`block relative group transition-transform duration-300 hover:scale-105 ${
-				variant === 'home' ? 'w-[100px] md:w-[160px]' : ''
-			}`}
+			className={clsx(
+				'block relative group transition-transform duration-300 hover:scale-105',
+				variant === 'home' && 'w-[100px] md:w-[160px]'
+			)}
 		>
 			<div
-				className={`relative overflow-hidden rounded-xl  ${
-					variant === 'category' ? 'w-40 md:w-80 h-24 md:h-48' : 'w-28 h-40 md:w-40 md:h-64'
-				}`}
+				className={clsx(
+					'relative overflow-hidden rounded-xl',
+					variant === 'category'
+						? 'w-40 md:w-80 h-24 md:h-48'
+						: 'w-28 h-40 md:w-40 md:h-64'
+				)}
 			>
 				<img
-					className={`w-full h-full object-cover  ${
-						variant === 'category' ? '' : 'rounded-lg'
-					}`}
+					className={clsx(
+						'w-full h-full object-cover',
+						variant !== 'category' && 'rounded-lg'
+					)}
 					src={covers[item.posterKey]}
 					loading='lazy'
 				/>

@@ -1,6 +1,11 @@
-import type { homeCollectionsPosterKey } from '@features/home-collections/assets/home-posters'
 import type { moviesCategoryPosterKey } from '@features/category-content/assets/movies-covers'
 import type { serialsCategoryPosterKey } from '@features/category-content/assets/serials-covers'
+import type { homeCollectionsPosterKey } from '@features/home-collections/assets/home-posters'
+
+export type AllPosterKeys = 
+  | homeCollectionsPosterKey 
+  | moviesCategoryPosterKey 
+  | serialsCategoryPosterKey
 
 export interface MovieCategory {
 	id: number
@@ -29,11 +34,33 @@ export interface ICategoryItem {
 	urlCountry: string
 	restrict: number
 	isSubscribeContent: boolean
-	posterKey: homeCollectionsPosterKey
+	posterKey: AllPosterKeys
 	link?: string
 }
 
-const transformToCategoryItems = (data: any[]): ICategoryItem[] => {
+export interface ICategoryItemInput {
+	id: number
+	title: string
+	urlTitle?: string
+	genre?: string
+	urlGenre?: string
+	rating?: number
+	actors?: string[]
+	year?: string | number
+	timing?: string
+	country?: string
+	urlCountry?: string
+	restrict?: number
+	isSubscribeContent?: boolean
+	tags?: string[]
+	urlTags?: string[]
+	logo?: string
+	posterKey: AllPosterKeys
+	description?: string
+	link?: string
+}
+
+const transformToCategoryItems = (data: ICategoryItemInput[]): ICategoryItem[] => {
 	return data.map((item) => ({
 		id: item.id,
 		title: item.title,
@@ -41,18 +68,13 @@ const transformToCategoryItems = (data: any[]): ICategoryItem[] => {
 		genre: item.genre || '',
 		urlGenre: item.urlGenre || '',
 		rating: item.rating || 0,
-		actors: item.actors || [],
-		year: item.year || 0,
+		year: Number(item.year) || 0,
 		timing: item.timing || '',
 		country: item.country || '',
 		urlCountry: item.urlCountry || '',
 		restrict: item.restrict || 0,
 		isSubscribeContent: item.isSubscribeContent || false,
-		tags: item.tags || [],
-		urlTags: item.urlTags || '',
-		logo: item.logo || '',
 		posterKey: item.posterKey,
-		description: item.description,
 		link: item.link,
 	}))
 }
