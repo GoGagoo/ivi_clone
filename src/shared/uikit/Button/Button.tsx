@@ -1,15 +1,17 @@
+import '@app/styles/vars.css'
 import { Button as HeadlessButton } from '@headlessui/react'
 import type { FC, MouseEvent, ReactNode } from 'react'
-import '../../../styles/vars.css'
 
 import clsx from 'clsx'
 
 interface Props {
 	children: ReactNode
-	title?: string
+	loading?: boolean
+	disabled?: boolean
+	type?: 'button' | 'submit' | 'reset' | undefined
 	size?: 'sm' | 'md' | 'lg'
-	onClick: (e: MouseEvent<HTMLButtonElement>) => void
-	variant?: 'primary' | 'secondary'
+	onClick?: (e: MouseEvent<HTMLButtonElement>) => void
+	variant?: 'primary' | 'subscription'
 	className?: string
 }
 
@@ -21,32 +23,39 @@ const sizeClasses = {
 
 const variantClasses = {
 	primary:
-		'bg-[var(--primary-bg-color)] text-white hover:bg-[var(--hover-primary-color)]',
-	secondary:
-		'bg-[var(--secondary-color)] hover:bg-pink-500 text-[var(--primary-color)]',
+		'text-white disabled:text-[var(--secondary-color)] disabled:bg-[#0c0b12] disabled:cursor-not-allowed bg-[var(--primary-bg-color)]',
+	subscription:
+		'bg-[linear-gradient(to_right,var(--subscribe-bg-from),var(--subscribe-bg-to))] text-[var(--hover-primary-color)] dark:text-[var(--primary-color)]',
 }
+
 export const Button: FC<Props> = ({
 	children,
 	onClick,
-	title,
+	loading,
+	disabled,
 	className = '',
 	size = 'md',
 	variant = 'primary',
+	type,
 }) => {
 	return (
 		<HeadlessButton
 			as='button'
-			type='button'
+			type={type}
+			disabled={disabled}
 			onClick={onClick}
 			className={clsx(
-				'rounded-xl font-semibold transition-colors duration-200 outline-none',
+				'font-semibold cursor-pointer outline-none',
 				sizeClasses[size],
 				variantClasses[variant],
 				className
 			)}
-			title={title}
 		>
-			{children}
+			{loading ? (
+				<p className='place-items-center'>Проверка...</p>
+			) : (
+				children
+			)}
 		</HeadlessButton>
 	)
 }

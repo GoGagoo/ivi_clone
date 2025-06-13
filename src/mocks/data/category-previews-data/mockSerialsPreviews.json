@@ -1,0 +1,34 @@
+{
+	"serialsPreview": [
+		{
+			"id": 1,
+			"title": "Новинки",
+			"posterKey": "serialsCover1",
+			"link": "/collections/serials-new"
+		},
+		{
+			"id": 2,
+			"title": "Российские новинки",			
+			"posterKey": "serialsCover2",
+			"link": "/collections/new-foreign-serials"
+		},
+		{
+			"id": 3,
+			"title": "Зарубежные новинки",
+			"posterKey": "serialsCover3",
+			"link": ""
+		},
+		{
+			"id": 4,
+			"title": "Лучшие новинки",
+			"posterKey": "serialsCover4",
+			"link": ""
+		},
+		{
+			"id": 5,
+			"title": "Бесплатные новинки",
+			"posterKey": "serialsCover5",
+			"link": ""
+		}
+	]
+}

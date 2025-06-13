@@ -1,0 +1,34 @@
+{
+	"moviesPreview": [
+		{
+			"id": 1,
+			"title": "Новинки подписки",
+			"posterKey": "moviesCover1",
+			"link": "/collections/new-movies"
+		},
+		{
+			"id": 2,
+			"title": "Лучшее в подписке",			
+			"posterKey": "moviesCover2",
+			"link": "/collections/new-movies"
+		},
+		{
+			"id": 3,
+			"title": "Премьеры на ИВИ",
+			"posterKey": "moviesCover3",
+			"link": ""
+		},
+		{
+			"id": 4,
+			"title": "Зарубежные новинки",
+			"posterKey": "moviesCover4",
+			"link": ""
+		},
+		{
+			"id": 5,
+			"title": "Бесплатные новинки",
+			"posterKey": "moviesCover5",
+			"link": ""
+		}
+	]
+}
